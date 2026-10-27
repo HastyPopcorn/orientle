@@ -17,7 +17,7 @@
 
 ## nicher locations
 - angel of the north
-- 10 downing street
+- 10 downing street (its perhaps a little redundant given that its like 200 metres from the houses of parliament)
 - chicago bean
 
 ## very niche locations
