@@ -23,15 +23,6 @@ import orientle.json.Json;
 
 /**
  * HTTP API (JSON in, JSON out). Every game endpoint returns the same "game state" shape.
- *
- * <pre>
- *   POST /api/games              {"rounds": 5}                         -> 201 game state (rounds optional)
- *   GET  /api/games/{id}                                               -> game state (use to resume)
- *   POST /api/games/{id}/guess   {"bearing": 288, "distance": 5500,
- *                                 "unit": "km"|"mi"}                   -> game state incl. the new result
- *   POST /api/games/{id}/next                                          -> game state for the next round
- * </pre>
- *
  * Anything outside {@code /api/} is served from the static directory.
  */
 public final class OrientleServer {
@@ -131,6 +122,8 @@ public final class OrientleServer {
         }
     }
 
+    // --------------------------------------------------------------------- routing
+
     private Reply route(HttpExchange ex) throws IOException {
         String method = ex.getRequestMethod();
         String rest = ex.getRequestURI().getPath().substring("/api/".length());
@@ -161,6 +154,8 @@ public final class OrientleServer {
         }
         throw ApiException.notFound("No such endpoint");
     }
+
+    // ------------------------------------------------------------------ handlers
 
     private Object createGame(HttpExchange ex) throws IOException {
         Map<String, Object> body = readJsonObject(ex, true);
